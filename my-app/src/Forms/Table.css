@@ -127,7 +127,7 @@
   /* Table.css */
 
 /* Custom styles for Chakra UI Radio component */
-.chakra-radio__control[data-checked] {
+.chakra-check[data-checked] {
     background-color: green;
     border: none;
 fill: green;

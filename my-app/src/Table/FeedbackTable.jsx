@@ -16,8 +16,10 @@ import {
     InputRightElement,
     Box,
     Text,
-    Button,
+    Button
   } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
+
   import { SearchIcon } from "@chakra-ui/icons";
 
 const FeedbackTable = () => {
@@ -84,7 +86,9 @@ const FeedbackTable = () => {
           </InputRightElement>
         </InputGroup>
         <Button colorScheme="green" ml={4}>
+          <Link to={"/"}>
           Add
+          </Link>
         </Button>
           </Box>
       </Box>
