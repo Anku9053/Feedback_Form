@@ -3,6 +3,8 @@
 import Framer_Form from "./Forms/Framer_Form";
 import FormScreen from "./Forms/Screenone";
 import Screenone from "./Forms/Screenone";
+import Routes_Generc from "./Routes/Routes";
+import Routes from "./Routes/Routes";
 import FeedbackTable from "./Table/FeedbackTable";
 
 function App() {
@@ -10,12 +12,8 @@ function App() {
    
   return (
     <div className="App">
-      {/* <PostTodo/>
-      <Todo/>
-      <Todos/> */}
-      <FormScreen/>
-      {/* <Framer_Form/> */}
-      {/* <FeedbackTable/> */}
+     
+      <Routes_Generc/>
     </div>
   );
 }

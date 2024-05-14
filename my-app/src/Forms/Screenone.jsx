@@ -6,13 +6,10 @@ import {
   Input,
   FormHelperText,
   FormErrorMessage,
-  RadioGroup,
   HStack,
-  Radio,
   Button,
-  // Header,
-  Spinner,
   useToast,
+  Checkbox,
 } from "@chakra-ui/react";
 import FlagSelect from "react-flags-select";
 import "./Table.css";
@@ -40,10 +37,10 @@ const FormScreen = () => {
     }));
   };
 
-  const handleRadioChange = (name, value) => {
+  const handleCheckboxChange = (name, value) => {
     setForm((prevForm) => ({
       ...prevForm,
-      [name]: value,
+      [name]: prevForm[name] === value ? '' : value,
     }));
   };
 
@@ -132,119 +129,116 @@ const FormScreen = () => {
   };
 
   return (
-    <Box style={{padding:"2rem"}}>
-    <Box style={{display:"flex",justifyContent:"start",fontSize:"2rem"
-    }}>
-      <h1>Aromatic</h1>
-    </Box>
-    <Box p={10} width="70%" style={{marginTop:"5rem"}} margin="auto" borderWidth="1px" borderRadius="lg" boxShadow="lg" backgroundColor="white">
-      <Box style={{display:"grid",gridTemplateColumns:"repeat(2,1fr)",gap:"1rem"}}>
+    <Box bg="black" color="white">
+      <Box bg={"#1f1e1e"} padding={5} display="flex" justifyContent="space-between" alignItems="center" fontSize="2rem">
+        <Box style={{width:"30%"}}>
+          <p>Aromatic</p>
+        </Box>
 
-      <FormControl id="customerName" mb={4} isInvalid={errors.customerName}>
-        <FormLabel>Customer Name</FormLabel>
-        <Input
-          type="text"
-          name="customerName"
-          value={form.customerName}
-          onChange={handleInputChange}
-          className="input-field"
-        />
-        {errors.customerName && <FormErrorMessage>{errors.customerName}</FormErrorMessage>}
-      </FormControl>
-
-      <FormControl id="email" mb={4} isInvalid={errors.email}>
-        <FormLabel>Email</FormLabel>
-        <Input
-          type="email"
-          name="email"
-          value={form.email}
-          onChange={handleInputChange}
-          className="input-field"
-        />
-        {errors.email ? (
-          <FormErrorMessage>{errors.email}</FormErrorMessage>
-        ) : (
-          <FormHelperText>We'll never share your email.</FormHelperText>
-        )}
-      </FormControl>
-
-      <FormControl id="country" mb={4}>
-        <FormLabel>Country</FormLabel>
-        <FlagSelect
-          countries={["IN", "US"]}
-          selected={form.country || "IN"}
-          onSelect={handleFlagSelect}
-          className="flag-select"
-          showSelectedLabel={false}
-        />
-      </FormControl>
-
-      <FormControl id="phone" mb={4} isInvalid={errors.phone}>
-        <FormLabel>Phone</FormLabel>
-        <Input
-          type="tel"
-          name="phone"
-          value={form.phone}
-          onChange={handleInputChange}
-          className="input-field"
-        />
-        {errors.phone && <FormErrorMessage>{errors.phone}</FormErrorMessage>}
-      </FormControl>
-
+        <Box style={{display:"flex",textTransform:"capitalize",fontSize:"1rem"}}>  
+          <p style={{marginRight:"2rem"}}>Dashboard</p>
+          <p>FeedBacks</p>
+        </Box>
       </Box>
-      <Box style={{display:"grid",gridTemplateColumns:"repeat(2,1fr)",gap:"1rem"}}>
-        <FormControl as="fieldset" mb={4} isInvalid={errors.serviceQuality} style={{color:"black"}}>
-          <FormLabel as="legend" className="FormLabel">Please rate the quality of the service you received from your host</FormLabel>
-          <RadioGroup name="serviceQuality" onChange={(value) => handleRadioChange("serviceQuality", value)} value={form.serviceQuality}>
+      <Box p={10} mt={4} width="70%" style={{marginTop:"3rem"}} margin="auto" borderWidth="1px" borderRadius="lg" boxShadow="lg" backgroundColor="white">
+        <Box style={{display:"grid",gridTemplateColumns:"repeat(2,1fr)",gap:"0.5rem"}}>
+  
+          <FormControl id="customerName" mb={4} isInvalid={errors.customerName}>
+            <FormLabel>Customer Name</FormLabel>
+            <Input
+              type="text"
+              name="customerName"
+              value={form.customerName}
+              onChange={handleInputChange}
+              className="input-field"
+            />
+            {errors.customerName && <FormErrorMessage>{errors.customerName}</FormErrorMessage>}
+          </FormControl>
+  
+          <FormControl id="email" mb={4} isInvalid={errors.email}>
+            <FormLabel>Email</FormLabel>
+            <Input
+              type="email"
+              name="email"
+              value={form.email}
+              onChange={handleInputChange}
+              className="input-field"
+            />
+            {errors.email ? (
+              <FormErrorMessage>{errors.email}</FormErrorMessage>
+            ) : (
+              <FormHelperText>We'll never share your email.</FormHelperText>
+            )}
+          </FormControl>
+        </Box>
+        
+        <Box style={{display:"flex",flexDirection:"row",gridTemplateColumns:"repeat(1,1fr)"}}>
+          <FormControl id="country" mb={4}>
+            <FormLabel>Country</FormLabel>
+            <FlagSelect
+              countries={["IN", "US"]}
+              selected={form.country || "IN"}
+              onSelect={handleFlagSelect}
+              className="flag-select"
+              showSelectedLabel={false}
+            />
+          </FormControl>
+  
+          <FormControl id="phone" mb={4} isInvalid={errors.phone}>
+            <FormLabel>Phone</FormLabel>
+            <Input
+              type="tel"
+              name="phone"
+              value={form.phone}
+              onChange={handleInputChange}
+              className="input-field"
+            />
+            {errors.phone && <FormErrorMessage>{errors.phone}</FormErrorMessage>}
+          </FormControl>
+  
+        </Box>
+        <Box style={{display:"grid",gridTemplateColumns:"repeat(2,1fr)",gap:"3rem"}}>
+          <FormControl as="fieldset" mb={4} isInvalid={errors.serviceQuality} style={{color:"black"}}>
+            <FormLabel as="legend" className="FormLabel">Please rate the quality of the service you received from your host</FormLabel>
             <HStack spacing="24px">
-              <Radio value="Excellent">Excellent</Radio>
-              <Radio value="Good">Good</Radio>
-              <Radio value="Fair">Fair</Radio>
-              <Radio value="Bad">Bad</Radio>
+              <Checkbox value="Excellent" isChecked={form.serviceQuality === 'Excellent'} onChange={() => handleCheckboxChange("serviceQuality", "Excellent")}>Excellent</Checkbox>
+              <Checkbox value="Good" isChecked={form.serviceQuality === 'Good'} onChange={() => handleCheckboxChange("serviceQuality", "Good")}>Good</Checkbox>
+              <Checkbox value="Fair" isChecked={form.serviceQuality === 'Fair'} onChange={() => handleCheckboxChange("serviceQuality", "Fair")}>Fair</Checkbox>
+              <Checkbox value="Bad" isChecked={form.serviceQuality === 'Bad'} onChange={() => handleCheckboxChange("serviceQuality", "Bad")}>Bad</Checkbox>
             </HStack>
-          </RadioGroup>
-          {errors.serviceQuality && <FormErrorMessage>{errors.serviceQuality}</FormErrorMessage>}
-        </FormControl>
-
-        <FormControl as="fieldset" mb={4} isInvalid={errors.cleanliness}>
-          <FormLabel as="legend" className="FormLabel">Was our restaurant clean?</FormLabel>
-          <RadioGroup name="cleanliness" onChange={(value) => handleRadioChange("cleanliness", value)} value={form.cleanliness}>
+            {errors.serviceQuality && <FormErrorMessage>{errors.serviceQuality}</FormErrorMessage>}
+          </FormControl>
+  
+          <FormControl as="fieldset" mb={4} isInvalid={errors.cleanliness}>
+            <FormLabel as="legend" className="FormLabel">Was our restaurant clean?</FormLabel>
             <HStack spacing="24px">
-              <Radio value="Excellent">Excellent</Radio>
-              <Radio value="Good">Good</Radio>
-              <Radio value="Fair">Fair</Radio>
-              <Radio value="Bad">Bad</Radio>
+              <Checkbox value="Excellent" isChecked={form.cleanliness === 'Excellent'} onChange={() => handleCheckboxChange("cleanliness", "Excellent")}>Excellent</Checkbox>
+              <Checkbox value="Good" isChecked={form.cleanliness === 'Good'} onChange={() => handleCheckboxChange("cleanliness", "Good")}>Good</Checkbox>
+              <Checkbox value="Fair" isChecked={form.cleanliness === 'Fair'} onChange={() => handleCheckboxChange("cleanliness", "Fair")}>Fair</Checkbox>
+              <Checkbox value="Bad" isChecked={form.cleanliness === 'Bad'} onChange={() => handleCheckboxChange("cleanliness", "Bad")}>Bad</Checkbox>
             </HStack>
-          </RadioGroup>
-          {errors.cleanliness && <FormErrorMessage>{errors.cleanliness}</FormErrorMessage>}
-        </FormControl>
-
-        <FormControl as="fieldset" mb={4} isInvalid={errors.overallExperience}>
-          <FormLabel as="legend" className="FormLabel">Please rate your overall dining experience</FormLabel>
-          <RadioGroup name="overallExperience" onChange={(value) => handleRadioChange("overallExperience", value)} value={form.overallExperience}>
+            {errors.cleanliness && <FormErrorMessage>{errors.cleanliness}</FormErrorMessage>}
+          </FormControl>
+  
+          <FormControl as="fieldset" mb={4} isInvalid={errors.overallExperience}>
+            <FormLabel as="legend" className="FormLabel">Please rate your overall dining experience</FormLabel>
             <HStack spacing="24px">
-              <Radio value="Excellent">Excellent</Radio>
-              <Radio value="Good">Good</Radio>
-              <Radio value="Fair">Fair</Radio>
-              <Radio value="Bad">Bad</Radio>
+              <Checkbox value="Excellent" isChecked={form.overallExperience === 'Excellent'} onChange={() => handleCheckboxChange("overallExperience", "Excellent")}>Excellent</Checkbox>
+              <Checkbox value="Good" isChecked={form.overallExperience === 'Good'} onChange={() => handleCheckboxChange("overallExperience", "Good")}>Good</Checkbox>
+              <Checkbox value="Fair" isChecked={form.overallExperience === 'Fair'} onChange={() => handleCheckboxChange("overallExperience", "Fair")}>Fair</Checkbox>
+              <Checkbox value="Bad" isChecked={form.overallExperience === 'Bad'} onChange={() => handleCheckboxChange("overallExperience", "Bad")}>Bad</Checkbox>
             </HStack>
-          </RadioGroup>
-          {errors.overallExperience && <FormErrorMessage>{errors.overallExperience}</FormErrorMessage>}
-        </FormControl>
-
+            {errors.overallExperience && <FormErrorMessage>{errors.overallExperience}</FormErrorMessage>}
+          </FormControl>
+  
+        </Box>
+  
+        <Box display="flex" justifyContent="end">
+          <Button colorScheme="green" mt={4} onClick={handleSubmit} isLoading={isLoading} loadingText="Submitting">
+            Submit
+          </Button>
+        </Box>
       </Box>
-
-      <Box style={{display:"flex",justifyContent:"end"}}>
-        <Button colorScheme="green" width="15%" mt={4} onClick={handleSubmit}>
-          Submit
-        </Button>
-        {isLoading && (
-          <Box display="flex" justifyContent="center" mt={4}>
-            <Spinner />
-          </Box>
-        )}
-      </Box>
-    </Box>
     </Box>
   );
 };
