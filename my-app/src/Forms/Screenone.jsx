@@ -13,6 +13,7 @@ import {
 } from "@chakra-ui/react";
 import FlagSelect from "react-flags-select";
 import "./Table.css";
+import { Link } from "react-router-dom";
 
 const FormScreen = () => {
   const [form, setForm] = useState({
@@ -135,9 +136,13 @@ const FormScreen = () => {
           <p>Aromatic</p>
         </Box>
 
-        <Box style={{display:"flex",textTransform:"capitalize",fontSize:"1rem"}}>  
+        <Box style={{display:"flex",textTransform:"capitalize",fontSize:"1rem"}}>
+          <Link to={"/receivedfeedback"}>
           <p style={{marginRight:"2rem"}}>Dashboard</p>
+          </Link> 
+          <Link to={"/receivedfeedback"}>
           <p>FeedBacks</p>
+          </Link>
         </Box>
       </Box>
       <Box p={10} mt={4} width="70%" style={{marginTop:"3rem"}} margin="auto" borderWidth="1px" borderRadius="lg" boxShadow="lg" backgroundColor="white">
