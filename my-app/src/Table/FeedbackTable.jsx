@@ -32,7 +32,7 @@ const FeedbackTable = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/feedback");
+        const response = await fetch("https://powerful-shirt-slug.cyclic.app/feedback");
         const data = await response.json();
         setFeedbacks(data);
         setFilteredFeedbacks(data);

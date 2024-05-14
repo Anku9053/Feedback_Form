@@ -79,7 +79,7 @@ const FormScreen = () => {
       // Data is valid, proceed with submission
       setIsLoading(true);
       try {
-        const response = await fetch('http://localhost:5000/feedback', {
+        const response = await fetch('https://powerful-shirt-slug.cyclic.app/feedback', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

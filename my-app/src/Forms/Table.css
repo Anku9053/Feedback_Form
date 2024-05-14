@@ -124,19 +124,13 @@
 
  
 
-  /* Table.css */
+/* Custom styles for Chakra UI Checkbox component */
+.chakra-checkbox__control[data-checked] {
+  background-color: green;
+  border: none;
+  fill: green;
+}
 
-/* Custom styles for Chakra UI Radio component */
-.chakra-check[data-checked] {
-    background-color: green;
-    border: none;
-fill: green;
-   
-  }
-  
-  .chakra-radio__control {
-    border-color: black;
-    /* border: none; */
-   
-  }
-  
+.chakra-checkbox__control {
+  border-color: black;
+}
