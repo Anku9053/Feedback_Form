@@ -36,6 +36,14 @@ const FormScreen = () => {
       ...prevForm,
       [name]: value,
     }));
+
+    // Clear the error for the field that has been changed
+    if (errors[name]) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [name]: '',
+      }));
+    }
   };
 
   const handleCheckboxChange = (name, value) => {
@@ -43,6 +51,14 @@ const FormScreen = () => {
       ...prevForm,
       [name]: prevForm[name] === value ? '' : value,
     }));
+
+    // Clear the error for the field that has been changed
+    if (errors[name]) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [name]: '',
+      }));
+    }
   };
 
   const handleFlagSelect = (countryCode) => {
@@ -79,7 +95,7 @@ const FormScreen = () => {
       // Data is valid, proceed with submission
       setIsLoading(true);
       try {
-        const response = await fetch('https://powerful-shirt-slug.cyclic.app/feedback', {
+        const response = await fetch('https://giant-gear-bat.cyclic.app/feedback', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -104,6 +120,7 @@ const FormScreen = () => {
             cleanliness: '',
             overallExperience: '',
           });
+          setErrors({});
         } else {
           toast({
             title: "Submission failed",
